@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class AutoResizeTest {
 
@@ -29,7 +30,7 @@ public class AutoResizeTest {
     @Test
     public void testAutoResizeNotZeroUponRestart() throws IOException {
 
-        File cmap = File.createTempFile("chron", "cmap");
+        File cmap = Files.createTempFile("chron", "cmap").toFile();
 
         try (ChronicleMap<String, String> map = ChronicleMapBuilder
                 .of(String.class, String.class)

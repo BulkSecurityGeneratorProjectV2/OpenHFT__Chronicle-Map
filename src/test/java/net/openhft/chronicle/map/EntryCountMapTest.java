@@ -24,6 +24,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +43,7 @@ public class EntryCountMapTest {
     int scoreCount = 0;
 
     static File getPersistenceFile() throws IOException {
-        File file = File.createTempFile("ecm-chm-test", ".deleteme");
+        File file = Files.createTempFile("ecm-chm-test", ".deleteme").toFile();
         file.deleteOnExit();
         return file;
     }

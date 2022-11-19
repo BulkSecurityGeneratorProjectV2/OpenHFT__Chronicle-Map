@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class Issue24ChronicleSetTest {
     public static <K, H extends ChronicleHash<K, ?, ?, ?>, B extends ChronicleHashBuilder<K, H, B>>
     H init(B builder, int entrySize, int averageKeySize) throws IOException {
 
-        File file = File.createTempFile("stringSet", ".dat");
+        File file = Files.createTempFile("stringSet", ".dat").toFile();
         file.deleteOnExit();
         try {
             H result = builder.entries(entrySize)

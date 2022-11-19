@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 
 import static net.openhft.chronicle.values.Values.newNativeReference;
@@ -47,7 +48,7 @@ public class DemoChronicleMapTest {
 
     @Test
     public void testMap() throws IOException {
-        File file = File.createTempFile("DummyOrders" + System.currentTimeMillis(), ".test");
+        File file = Files.createTempFile("DummyOrders" + System.currentTimeMillis(), ".test").toFile();
         file.deleteOnExit();
         int maxEntries = 1000;
         try (ChronicleMap<IntValue, DemoOrderVOInterface> map = ChronicleMapBuilder
@@ -90,7 +91,7 @@ public class DemoChronicleMapTest {
 
     @Test
     public void testMapLocked() throws IOException {
-        File file = File.createTempFile("DummyOrders-" + System.currentTimeMillis(), ".test");
+        File file = Files.createTempFile("DummyOrders-" + System.currentTimeMillis(), ".test").toFile();
         file.deleteOnExit();
         int maxEntries = 1000;
         try (ChronicleMap<IntValue, DemoOrderVOInterface> map = ChronicleMapBuilder

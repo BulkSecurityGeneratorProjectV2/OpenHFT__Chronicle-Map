@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class BloatFactorTest {
 
@@ -20,7 +21,7 @@ public class BloatFactorTest {
     @Test
     public void bloatFactorTest() throws IOException {
 
-        File cmap = File.createTempFile("chron", "cmap");
+        File cmap = Files.createTempFile("chron", "cmap").toFile();
 
         try (ChronicleMap<Integer, StringArrayExampleTest.CharSequenceArray> map = ChronicleMapBuilder
                 .of(Integer.class, StringArrayExampleTest.CharSequenceArray.class)

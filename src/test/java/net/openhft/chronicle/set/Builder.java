@@ -21,6 +21,7 @@ import net.openhft.chronicle.core.Jvm;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.file.Files;
 import java.util.Map;
 
 /**
@@ -35,7 +36,7 @@ public class Builder {
 
     public static File getPersistenceFile() throws IOException {
 
-        final File file = File.createTempFile("chm-test-", "map");
+        final File file = Files.createTempFile("chm-test-", "map").toFile();
 
         //Not Guaranteed to work on Windows, since OS file-lock takes precedence
         if (System.getProperty("os.name").indexOf(WIN_OS) > 0) {

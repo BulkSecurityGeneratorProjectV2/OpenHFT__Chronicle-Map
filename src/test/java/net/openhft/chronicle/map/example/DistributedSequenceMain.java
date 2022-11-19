@@ -23,12 +23,13 @@ import net.openhft.chronicle.values.Values;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 
 public class DistributedSequenceMain {
 
     public static void main(String... ignored) throws IOException {
-        File file = File.createTempFile("sequence-numbers", ".dat");
+        File file = Files.createTempFile("sequence-numbers", ".dat").toFile();
         try (ChronicleMap<String, LongValue> map =
                      ChronicleMapBuilder.of(String.class, LongValue.class)
                              .entries(128)

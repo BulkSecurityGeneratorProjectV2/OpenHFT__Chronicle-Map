@@ -34,12 +34,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.stream.Collectors.toSet;
 import static org.junit.Assert.*;
+
 @org.junit.Ignore("flaky test see - https://teamcity.chronicle.software/repository/download/OpenHFT_ReleaseJob_ReleaseByArtifact/643179:id/ReleaseAutomation/projects/chronicle-map-runTests-1642011539698.log")
 @SuppressWarnings({"unchecked", "ResultOfMethodCallIgnored"})
 public class ChronicleMapTest {
@@ -1022,7 +1024,7 @@ public class ChronicleMapTest {
                     .actualSegments(256)
                     .averageKeySize(13);
 
-            File tmpFile = File.createTempFile("testAcquirePerf", ".deleteme");
+            File tmpFile = Files.createTempFile("testAcquirePerf", ".deleteme").toFile();
             tmpFile.deleteOnExit();
             try (ChronicleMap<CharSequence, LongValue> map = builder.createPersistedTo(tmpFile)) {
 
@@ -1118,7 +1120,7 @@ public class ChronicleMapTest {
                     .entries(entries)
                     .actualSegments(8 * 1024);
 
-            File tmpFile = File.createTempFile("testAcquirePerf", ".deleteme");
+            File tmpFile = Files.createTempFile("testAcquirePerf", ".deleteme").toFile();
             tmpFile.deleteOnExit();
             try (ChronicleMap<LongValue, LongValue> map = builder.createPersistedTo(tmpFile)) {
                 int count = runs > 500 ? runs > 1200 ? 3 : 5 : 5;
@@ -1802,7 +1804,7 @@ public class ChronicleMapTest {
 
     @Test
     public void testOnheapAcquireUsingLocked() throws IOException {
-        File tmpFile = File.createTempFile("testAcquireUsingLocked", ".deleteme");
+        File tmpFile = Files.createTempFile("testAcquireUsingLocked", ".deleteme").toFile();
         tmpFile.deleteOnExit();
         try (final ChronicleMap<CharSequence, LongValue> map = ChronicleMapBuilder
                 .of(CharSequence.class, LongValue.class)

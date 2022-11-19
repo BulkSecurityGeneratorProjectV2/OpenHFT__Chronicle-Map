@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -51,7 +52,7 @@ public class RecoverTest {
     @Ignore("HCOLL-422")
     @Test
     public void recoverTest() throws IOException, ExecutionException, InterruptedException {
-        File mapFile = File.createTempFile("recoverTestFile", ".map");
+        File mapFile = Files.createTempFile("recoverTestFile", ".map").toFile();
         mapFile.deleteOnExit();
 
         ChronicleMapBuilder<Integer, Integer> builder = ChronicleMap

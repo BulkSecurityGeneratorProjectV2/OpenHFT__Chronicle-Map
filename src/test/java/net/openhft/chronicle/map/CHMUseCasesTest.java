@@ -44,6 +44,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.function.BiFunction;
 
@@ -239,7 +240,7 @@ public class CHMUseCasesTest {
     private void checkJsonSerialization() {
         File file = null;
         try {
-            file = File.createTempFile("chronicle-map-", ".json");
+            file = Files.createTempFile("chronicle-map-", ".json").toFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -295,7 +296,7 @@ public class CHMUseCasesTest {
             case SIMPLE_PERSISTED:
                 File file0 = null;
                 try {
-                    file0 = File.createTempFile("chronicle-map-", ".map");
+                    file0 = Files.createTempFile("chronicle-map-", ".map").toFile();
                     // Be paranoid
                     assertEquals(0, file0.length());
                 } catch (IOException e) {

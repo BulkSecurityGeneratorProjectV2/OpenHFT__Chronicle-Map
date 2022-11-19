@@ -21,6 +21,7 @@ import net.openhft.chronicle.values.Values;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import static net.openhft.chronicle.algo.MemoryUnit.BYTES;
 import static net.openhft.chronicle.algo.MemoryUnit.MEGABYTES;
@@ -28,7 +29,7 @@ import static net.openhft.chronicle.algo.MemoryUnit.MEGABYTES;
 public class VinceTest {
     public static void main(String[] args) throws IOException {
         long count = 100_000_000L;
-        File f = File.createTempFile("vince", ".map");
+        File f = Files.createTempFile("vince", ".map").toFile();
         f.deleteOnExit();
         try (ChronicleMap<CharSequence, LongValue> catalog = ChronicleMap
                 .of(CharSequence.class, LongValue.class)

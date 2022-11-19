@@ -24,6 +24,7 @@ import java.beans.XMLEncoder;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -39,7 +40,7 @@ public class LargeEntriesTest {
         final int ENTRIES = 250;
         final int ENTRY_SIZE = 100 * 1024;
 
-        File file = File.createTempFile("largeEntries" + System.currentTimeMillis(), ".deleteme");
+        File file = Files.createTempFile("largeEntries" + System.currentTimeMillis(), ".deleteme").toFile();
         file.deleteOnExit();
         try (final ChronicleMap<String, String> map = ChronicleMapBuilder
                 .of(String.class, String.class)
@@ -107,7 +108,7 @@ public class LargeEntriesTest {
 
     private void doLargeEntryPerf(int ENTRIES, final int ENTRY_SIZE) throws IOException, InterruptedException, ExecutionException {
         System.out.printf("Testing %,d entries of %,d KB%n", ENTRIES, ENTRY_SIZE / 1024);
-        File file = File.createTempFile("largeEntries", ".deleteme");
+        File file = Files.createTempFile("largeEntries", ".deleteme").toFile();
         file.deleteOnExit();
         final ChronicleMap<String, String> map = ChronicleMapBuilder
                 .of(String.class, String.class)

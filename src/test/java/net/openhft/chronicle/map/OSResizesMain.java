@@ -19,6 +19,7 @@ package net.openhft.chronicle.map;
 import net.openhft.chronicle.core.OS;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.Arrays;
 
 /**
@@ -29,7 +30,7 @@ import java.util.Arrays;
  */
 public class OSResizesMain {
     public static void main(String[] args) throws IOException, InterruptedException {
-        File file = File.createTempFile("over-sized", "deleteme");
+        File file = Files.createTempFile("over-sized", "deleteme").toFile();
         int valueSize = 1000 * 1000;
         byte[] chars = new byte[valueSize];
         ByteArray ba = new ByteArray(chars);

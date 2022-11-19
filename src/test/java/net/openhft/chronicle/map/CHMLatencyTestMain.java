@@ -23,6 +23,7 @@ import net.openhft.chronicle.values.Values;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -71,7 +72,7 @@ public class CHMLatencyTestMain {
     // TODO test passes but is under development.
     public static void main(String... ignored) throws IOException {
         AffinityLock lock = AffinityLock.acquireCore();
-        File file = File.createTempFile("testCHMLatency", "deleteme");
+        File file = Files.createTempFile("testCHMLatency", "deleteme").toFile();
 //        File file = new File("testCHMLatency.deleteme");
         file.delete();
         ChronicleMap<LongValue, LongValue> countersMap =
